@@ -1,0 +1,163 @@
+<div class="btn-group">
+    <div class="group-control-tbl">
+        <button (click)="onAddUser()" class="group-control-tbl__btn" mat-raised-button color="primary">
+            {{filterActions.buttons.add.label}}
+            <mat-icon>{{filterActions.buttons.add.icon}}</mat-icon>
+        </button>
+
+        <button (click)="onBlockedUser(StatusEnum.Active)" class="group-control-tbl__btn" mat-raised-button
+                color="primary">
+            {{filterActions.buttons.unlock.label}}
+            <mat-icon>{{filterActions.buttons.unlock.icon}}</mat-icon>
+        </button>
+
+        <button (click)="onBlockedUser(StatusEnum.Blocked)" class="group-control-tbl__btn" mat-raised-button
+                color="primary">
+            <mat-icon>{{filterActions.buttons.blocked.icon}}</mat-icon>
+            <span>{{filterActions.buttons.blocked.label}}</span>
+        </button>
+    </div>
+
+    <button (click)="filterForm.hidden = !filterForm.hidden" class="btn-group__control-filter-btn" mat-raised-button>
+        {{filterActions.buttons.filter.label}}
+        <mat-icon>{{filterActions.buttons.filter.icon}}</mat-icon>
+    </button>
+</div>
+
+<!--//Форма-->
+<form [formGroup]="userForm" novalidate #filterForm class="filter-form">
+    <mat-card class="filter-form__wrapper">
+        <mat-card-header class="filter-form__tittle">
+            {{filterActions.form.title}}
+        </mat-card-header>
+
+        <mat-card-content>
+            <div class="filter-form__content">
+                <div class="filter-card">
+                    <div class="filter-card__tittle">
+                        {{filterActions.form.filterCards.login.title}}
+                    </div>
+                    <mat-form-field appearance="outline">
+                        <input class="input" matInput formControlName="name">
+                        <button *ngIf="userForm.controls['name'].value" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="userForm.controls['name'].setValue('')">
+                            <mat-icon>
+                                {{filterActions.form.filterCards.login.icon}}
+                            </mat-icon>
+                        </button>
+                        <mat-error *ngIf="userForm.controls['name'].invalid">
+                            {{filterActions.form.filterCards.login.errorText}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="filter-card">
+                    <div class="filter-card__tittle">
+                        {{filterActions.form.filterCards.phone.title}}
+                    </div>
+                    <mat-form-field appearance="outline">
+                        <input mask="+0 (000) 000-00-00" matInput formControlName="phone">
+                        <button *ngIf="userForm.controls['phone'].value" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="userForm.controls['phone'].setValue('')">
+                            <mat-icon>
+                                {{filterActions.form.filterCards.phone.icon}}
+                            </mat-icon>
+                        </button>
+                        <mat-error *ngIf="userForm.controls['phone'].invalid">
+                            {{filterActions.form.filterCards.phone.errorText}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="filter-card">
+                    <div class="filter-card__tittle">
+                        {{filterActions.form.filterCards.createAt.title}}
+                    </div>
+                    <mat-form-field appearance="outline">
+                        <input matInput formControlName="createAt" [matDatepicker]="pickerCreateAt">
+                        <mat-datepicker-toggle matIconSuffix [for]="pickerCreateAt">
+                            <mat-icon matDatepickerToggleIcon>
+                                {{filterActions.form.filterCards.createAt.icon}}
+                            </mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #pickerCreateAt></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="filter-card">
+                    <div class="filter-card__tittle">
+                        {{filterActions.form.filterCards.status.title}}
+                    </div>
+                    <mat-form-field appearance="outline">
+                        <mat-select formControlName="status" [(value)]="selectedStatus">
+                            <mat-option *ngFor="let statusItem of filterActions.form.filterCards.status.options"
+                                        [value]="statusItem">
+                                {{statusItem | statusName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="filter-card">
+                    <div class="filter-card__tittle">
+                        {{filterActions.form.filterCards.email.title}}
+                    </div>
+                    <mat-form-field appearance="outline">
+                        <input matInput formControlName="email">
+                        <button *ngIf="userForm.controls['email'].value" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="userForm.controls['email'].setValue('')">
+                            <mat-icon>
+                                {{filterActions.form.filterCards.email.icon}}
+                            </mat-icon>
+                        </button>
+                        <mat-error *ngIf="userForm.controls['email'].invalid">
+                            {{filterActions.form.filterCards.email.errorText}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="filter-card">
+                    <div class="filter-card__tittle">
+                        {{filterActions.form.filterCards.isAdmin.title}}
+                    </div>
+                    <mat-form-field appearance="outline">
+                        <mat-select formControlName="isAdmin" [(value)]="selectedRole">
+                            <mat-option *ngFor="let roleItem of filterActions.form.filterCards.isAdmin.options"
+                                        [value]="roleItem">
+                                {{roleItem}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="filter-card">
+                    <div class="filter-card__tittle">
+                        {{filterActions.form.filterCards.updateAt.title}}
+                    </div>
+                    <mat-form-field appearance="outline">
+                        <input matInput formControlName="updateAt" [matDatepicker]="pickerUpdateAt">
+                        <mat-datepicker-toggle matIconSuffix [for]="pickerUpdateAt">
+                            <mat-icon matDatepickerToggleIcon>
+                                {{filterActions.form.filterCards.updateAt.icon}}
+                            </mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #pickerUpdateAt></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="filter-form__btn-group">
+                <button (click)="onApplyFilter()" mat-raised-button color="primary">
+                    {{filterActions.form.buttons.apply.label}}
+                </button>
+                <button (click)="onCancelFilter()" mat-raised-button>
+                    {{filterActions.form.buttons.cancel.label}}
+                </button>
+                <button (click)="userForm.reset()" mat-raised-button>
+                    {{filterActions.form.buttons.reset.label}}
+                </button>
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+</form>

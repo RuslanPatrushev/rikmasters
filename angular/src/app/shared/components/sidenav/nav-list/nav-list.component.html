@@ -1,0 +1,11 @@
+<mat-nav-list class="nav-list">
+  <button class="nav-list__content" mat-button [matMenuTriggerFor]="superagentMenu">
+    <div class="nav-list__title">{{navList.title}}</div>
+    <div class="nav-list__subtitle">{{navList.subtitle}}</div>
+    <mat-icon *ngIf="navList?.isArrow" class="nav-list__arrow">{{navList.icon}}</mat-icon>
+  </button>
+
+  <mat-menu #superagentMenu="matMenu">
+  </mat-menu>
+</mat-nav-list>
+

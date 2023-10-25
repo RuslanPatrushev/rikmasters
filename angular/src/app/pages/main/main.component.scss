@@ -1,0 +1,46 @@
+@use 'src/theme' as theme;
+
+mat-sidenav-container {
+    height: 100%;
+}
+
+.sidenav{
+    background: #666F78
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 40px 40px 49px 24px;
+    background: rgba(245, 246, 247, 1);
+}
+
+@media screen and (max-width: theme.$width-large) {
+    .container {
+        padding: 40px 44px 49px 44px;
+    }
+}
+
+@media screen and (max-width: theme.$width-medium) {
+    .container {
+        padding: 40px 40px 49px 40px;
+    }
+}
+
+@media screen and (max-width: theme.$width-small) {
+    .container {
+        padding: 40px 0 49px 0;
+    }
+}
+
+@media screen and (max-width: theme.$width-extra-small) {
+
+    mat-sidenav {
+        width: 100%;
+    }
+
+    .container {
+        padding: 32px 0;
+    }
+}

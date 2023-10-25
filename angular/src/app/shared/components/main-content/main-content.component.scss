@@ -1,0 +1,25 @@
+@use "src/theme"  as theme;
+
+.nav-back {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: rgba(102, 111, 120, 1);
+
+    @media screen and (max-width: theme.$width-small) {
+        margin: 0 0 0 16px;
+    }
+}
+
+.title {
+    margin: 32px 0 0;
+    font-size: 30px;
+
+    @media screen and (max-width: theme.$width-medium) {
+        font-size: 22px;
+    }
+
+    @media screen and (max-width: theme.$width-small) {
+        margin: 32px 16px 32px 16px;
+    }
+}

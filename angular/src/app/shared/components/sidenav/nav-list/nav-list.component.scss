@@ -1,0 +1,62 @@
+@use '../../../../../theme' as theme;
+
+
+.nav-list {
+    padding: 24px 42px 24px 80px;
+    border-bottom: 1px solid rgba(196, 196, 196, 1);
+
+    @media screen and (max-width: theme.$width-large) {
+        margin: 0 16px 0 16px;
+        width: auto;
+        padding: 16px 0 16px 0;
+    }
+
+    &__content {
+        align-items: flex-start;
+        height: auto;
+        font-family: "Moscow sans";
+        flex-direction: row-reverse;
+
+        @media screen and (max-width: theme.$width-large) {
+            display: flex;
+            width: 100%;
+            height: auto;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+        }
+
+    }
+
+    &__title {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        text-align: left;
+        line-height: 26px;
+
+        @media screen and (max-width: theme.$width-large) {
+            font-size: 18px;
+            margin-right: 16px;
+        }
+    }
+
+    &__subtitle {
+        font-size: 16px;
+        color: #E5E5E5;
+        line-height: 23px;
+    }
+
+    &__arrow {
+        color: white;
+        margin: 8px 0 0 0;
+        width: auto;
+        height: auto;
+    }
+
+    span {
+        @media screen and (max-width: theme.$width-large) {
+            display: flex;
+        }
+    }
+}

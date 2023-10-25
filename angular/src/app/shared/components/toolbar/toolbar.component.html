@@ -1,0 +1,27 @@
+<mat-toolbar color="primary" class="toolbar">
+
+  <ng-container [ngSwitch]="windowSizeService.currentTheme$ | async">
+    <ng-container  *ngSwitchCase="windowSizeEnum.ExtraLarge">
+      <mat-nav-list class="p-20">
+        <mat-icon class="toolbar-icon toolbar-icon__photo">{{toolbar.icons.person}}</mat-icon>
+        <div>
+          <div>{{profile.name}}</div>
+          <div>{{profile.role}}</div>
+        </div>
+
+        <button mat-button [matMenuTriggerFor]="userMenu" class="toolbar-button">
+          <mat-icon>{{toolbar.icons.arrow_drop_down}}</mat-icon>
+        </button>
+
+        <mat-menu #userMenu="matMenu">
+        </mat-menu>
+      </mat-nav-list>
+    </ng-container>
+
+      <ng-container *ngSwitchDefault>
+          <button mat-button class="toolbar-button" (click)="sidenavService.toggle()">
+              <mat-icon class="toolbar-icon">{{toolbar.icons.menu}}</mat-icon>
+          </button>
+      </ng-container>
+  </ng-container>
+</mat-toolbar>

@@ -1,0 +1,242 @@
+<ng-template #sortSelect>
+    <div class="sort-select">
+        Сортировать по
+        <mat-form-field class="sort-select__wrapper" appearance="outline">
+            <mat-select (selectionChange)="announceSortChange($event)" [(value)]="sortState.active">
+                <mat-option *ngFor="let column of tableColumns" [value]="column.name">
+                    {{column.title}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</ng-template>
+
+<!--Таблица-->
+<div>
+    <mat-card
+        class="table-card">
+        <div class="mat-elevation-z8">
+            <div class="paginator">
+                <mat-paginator #paginator PaginatorDirective class="" [length]="filteredData.length"
+                               [pageSize]="pageSize"
+                               [pageSizeOptions]="pageSizeOptions"
+                               (page)="onChangePageSize($event)"
+                >
+                </mat-paginator>
+
+                <div class="table-card__counter">Количество выбранных
+                    записей: {{this.tableSelection.selected.length}}</div>
+            </div>
+            <ng-container *ngIf="(windowSizeService.currentTheme$ |async) == WindowSizeEnum.ExtraLarge ||
+                (windowSizeService.currentTheme$ | async) == WindowSizeEnum.Large; then tableDesktop else tableMobile">
+
+            </ng-container>
+
+            <ng-template #tableDesktop>
+
+                <table mat-table matSort [matSortActive]="sortActive()"
+                       [matSortDirection]="sortDirection()"
+                       [dataSource]="dataSource"
+                       (matSortChange)="onChangeSort($event)">
+
+                    <ng-container [matColumnDef]="TableColumnEnum.Action">
+                        <th mat-header-cell *matHeaderCellDef>Действия</th>
+                        <td mat-cell *matCellDef="let user">
+                            <button mat-icon-button [matMenuTriggerFor]="menu">
+                                <mat-icon>more_horiz</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item>
+                                    <mat-icon>dialpad</mat-icon>
+                                    <span>Redial</span>
+                                </button>
+                            </mat-menu>
+                        </td>
+                    </ng-container>
+
+                    <ng-container [matColumnDef]="TableColumnEnum.Name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header
+                            sortActionDescription="Sort by number">
+                            <mat-checkbox color="warn" (click)="$event ? toggleAllRows($event) : null"
+                                          [checked]="isAllChecked()"
+                                          [indeterminate]="isAllIndeterminate()"
+                                          [aria-label]="checkboxLabel()">
+                            </mat-checkbox>
+                            Логин
+                        </th>
+                        <td mat-cell class="cell-login" *matCellDef="let row">
+                            <mat-checkbox color="warn" (click)="$event.stopPropagation()"
+                                          (change)="$event ? toggleRow(row) : null"
+                                          [checked]="isCheckedCheckbox(row)"
+                                          [aria-label]="checkboxLabel(row)">{{row.name}}
+                            </mat-checkbox>
+                        </td>
+                    </ng-container>
+
+
+                    <ng-container [matColumnDef]="TableColumnEnum.Email">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header
+                            sortActionDescription="Sort by number">
+                            E-mail
+                        </th>
+                        <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+                    </ng-container>
+
+                    <ng-container [matColumnDef]="TableColumnEnum.Phone">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header
+                            sortActionDescription="Sort by number">
+                            Телефон
+                        </th>
+                        <td mat-cell *matCellDef="let user"> {{user.phone | tel}} </td>
+                    </ng-container>
+
+                    <ng-container [matColumnDef]="TableColumnEnum.Is_admin">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header
+                            sortActionDescription="Sort by number">
+                            Роли
+                        </th>
+                        <td mat-cell
+                            *matCellDef="let user">{{user.is_admin ? "Администратор" : "Пользователь"}} </td>
+                    </ng-container>
+
+                    <ng-container [matColumnDef]="TableColumnEnum.Update_at">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header
+                            sortActionDescription="Sort by number">
+                            Дата изменения
+                        </th>
+                        <td mat-cell *matCellDef="let user"> {{user.update_at * 1000 | date:"dd.MM.yyyy"}} </td>
+                    </ng-container>
+
+                    <ng-container [matColumnDef]="TableColumnEnum.Create_at">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header
+                            sortActionDescription="Sort by number">
+                            Дата создания
+                        </th>
+                        <td mat-cell *matCellDef="let user"> {{user.create_at * 1000 | date:"dd.MM.yyyy"}} </td>
+                    </ng-container>
+
+                    <ng-container [matColumnDef]="TableColumnEnum.Status">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header
+                            sortActionDescription="Sort by number">
+                            Статус
+                        </th>
+                        <td class="cell-status" [ngClass]="{ 'cell-status_active': user.status==StatusEnum.Active}"
+                            mat-cell
+                            *matCellDef="let user">
+                            {{user.status | statusName}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container [matColumnDef]="TableColumnEnum.Is_Ecp">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header
+                            sortActionDescription="Sort by number">
+                            Наличие ЭП
+                        </th>
+                        <td class="cell-ecp" [ngClass]="{ 'cell-ecp_active': user.is_ecp}" mat-cell
+                            *matCellDef="let user">
+                            <mat-icon>{{user.is_ecp ? "check_circle" : "cancel"}}</mat-icon>
+                        </td>
+                    </ng-container>
+
+                    <tr class="table-card__header" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </ng-template>
+
+            <ng-template #tableMobile>
+
+                <ng-template [ngTemplateOutlet]="sortSelect"></ng-template>
+
+                <div class="table-card-item" *ngFor="let user of filteredData">
+
+                    <div class="table-card-item-row">
+                        <div class="table-card-item-row__cell">Действие</div>
+                        <div class="table-card-item-row__cell">
+                            <button mat-button [matMenuTriggerFor]="menu">
+                                <mat-icon>more_horiz</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                            </mat-menu>
+                        </div>
+                    </div>
+
+                    <div class="table-card-item-row">
+                        <div class="table-card-item-row__cell">
+                            <mat-checkbox color="warn" (click)="$event ? toggleAllRows($event) : null"
+                                          [checked]=" tableSelection.hasValue() && isAllSelected()"
+                                          [indeterminate]="tableSelection.hasValue() && !isAllSelected()"
+                                          [aria-label]="checkboxLabel()">
+                            </mat-checkbox>
+                            Логин
+                        </div>
+                        <div class="table-card-item-row__cell">
+                            <mat-checkbox color="warn" (click)="$event.stopPropagation()"
+                                          (change)="$event ? tableSelection.toggle(user) : null"
+                                          [checked]="tableSelection.isSelected(user)"
+                                          [aria-label]="checkboxLabel(user)">
+                            </mat-checkbox>
+                            {{user.name}}
+                        </div>
+                    </div>
+
+                    <div class="table-card-item-row">
+                        <div class="table-card-item-row__cell">E-mail</div>
+                        <div class="table-card-item-row__cell">{{user.email}}</div>
+                    </div>
+
+                    <div class="table-card-item-row">
+                        <div class="table-card-item-row__cell">Телефон</div>
+                        <div class="table-card-item-row__cell">{{user.phone | tel}}</div>
+                    </div>
+
+                    <div class="table-card-item-row">
+                        <div class="table-card-item-row__cell">Дата создания</div>
+                        <div class="table-card-item-row__cell">{{user.create_at * 1000 | date:"dd.MM.yyyy"}}</div>
+                    </div>
+
+                    <div class="table-card-item-row">
+                        <div class="table-card-item-row__cell">Дата изменения</div>
+                        <div class="table-card-item-row__cell">{{user.update_at * 1000 | date:"dd.MM.yyyy"}}</div>
+                    </div>
+
+                    <div class="table-card-item-row">
+                        <div class="table-card-item-row__cell">Роли</div>
+                        <div
+                            class="table-card-item-row__cell">{{user.is_admin ? "Администратор" : "Пользователь"}}</div>
+                    </div>
+
+                    <div class="table-card-item-row">
+                        <div class="table-card-item-row__cell">Наличие ЭП</div>
+                        <div [ngClass]="{ 'cell-ecp_active': user.is_ecp}"
+                             class="table-card-item-row__cell cell-ecp">
+                            <mat-icon>{{user.is_ecp ? "check_circle" : "cancel"}}</mat-icon>
+                        </div>
+                    </div>
+
+                    <div class="table-card-item-row">
+                        <div class="table-card-item-row__cell">Статус</div>
+                        <div [ngClass]="{ 'cell-status_active': user.status==StatusEnum.Active}"
+                             class="table-card-item-row__cell cell-status">{{user.status | statusName}}</div>
+                    </div>
+
+                </div>
+
+
+            </ng-template>
+            <div class="paginator">
+                <mat-paginator #paginatorSecond PaginatorDirective class="" [length]="filteredData.length"
+                               [pageSize]="pageSize"
+                               [pageSizeOptions]="pageSizeOptions"
+                               (page)="onChangePageSize($event)"
+                >
+                </mat-paginator>
+
+                <div class="table-card__counter">Количество выбранных
+                    записей: {{this.tableSelection.selected.length}}</div>
+            </div>
+            <ng-template *ngIf="(windowSizeService.currentTheme$ |async) !== WindowSizeEnum.ExtraLarge &&
+                (windowSizeService.currentTheme$ | async) !== WindowSizeEnum.Large"
+                         [ngTemplateOutlet]="sortSelect"></ng-template>
+        </div>
+    </mat-card>
+</div>

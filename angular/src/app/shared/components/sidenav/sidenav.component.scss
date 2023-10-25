@@ -1,0 +1,78 @@
+@use '../../../../theme' as theme;
+
+.group {
+    color: white;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 16px 40px 16px 15%;
+    width: 189px;
+
+    @media screen and (max-width: theme.$width-extra-large) {
+        margin: 16px 50px 16px 60px;
+    }
+
+    @media screen and (max-width: theme.$width-large) {
+        margin: 0 16px 0 16px;
+        width: auto;
+        padding: 16px 0 16px 0;
+    }
+
+    div:nth-child(1 of .group__sub) {
+        text-decoration: underline;
+
+        @media screen and (max-width: theme.$width-large) {
+            text-decoration: none;
+        }
+    }
+
+    div:nth-child(2 of .group__sub) {
+        color: rgba(232, 235, 237, 1);
+    }
+
+    mat-icon {
+        padding-right: 16px;
+    }
+
+    &__content {
+        display: flex;
+        font-size: 18px;
+        padding: 0 0 4px 0;
+        align-items: center;
+
+        @media screen and (max-width: theme.$width-large) {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__sub {
+        margin-left: 40px;
+        font-size: 14px;
+        padding: 12px 0 12px 0;
+
+        @media screen and (max-width: theme.$width-large) {
+            font-size: 18px;
+            margin: 0;
+        }
+    }
+}
+
+:nth-child(1 of .group) {
+    background-color: rgba(102, 111, 120, 1);
+}
+
+:nth-child(n+1 of .group):nth-child(-n+2 of .group) {
+    @media screen and (max-width: theme.$width-large) {
+        border-bottom: 1px solid rgba(196, 196, 196, 1);
+    }
+}
+
+:nth-child(n+3 of .group):nth-child(-n+5 of .group) {
+    @media screen and (max-width: theme.$width-large) {
+        padding: 6px 0 6px 0;
+        margin: 8px 16px 0 16px;
+    }
+}
+
+
