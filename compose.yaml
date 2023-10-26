@@ -1,12 +1,11 @@
 services:
-  web:
+  app:
     build:
-      context: angular
-      target: builder
+      context: ./angular
       args:
         API_URL: "http://cars.cprogroup.ru"
     ports:
-      - 4200:4200
+      - 4200:80
     volumes:
-      - ./angular:/project
+      - ./angular:/app
       - /project/node_modules

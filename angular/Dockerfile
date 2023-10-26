@@ -1,41 +1,23 @@
-# syntax=docker/dockerfile:1.4
+# stage 1
+FROM node:18 as node
 
-FROM --platform=$BUILDPLATFORM node:18-bullseye-slim as builder
-
-ARG API_URL="__API_URL__"
-ENV API_URL="${API_URL}"
-
-RUN mkdir /project
-WORKDIR /project
-
-RUN <<EOF
-#  set -Eeo pipefail
-  sed -i "s|__API_URL__|${API_URL}|"  src/index.html
-    exec "$@"
-EOF
-
-RUN npm install -g @angular/cli@16
-
+WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . .
+RUN npm run build --prod
 
-CMD ["ng", "serve", "--host", "0.0.0.0"]
+# stage 2
+FROM nginx:alpine
 
-FROM builder as dev-envs
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=node /app/dist/rikmasters ./usr/share/nginx/html/
 
-RUN <<EOF
-apt-get update
-apt-get install -y --no-install-recommends git
-EOF
+ARG API_URL="__API_URL__"
+ENV API_URL="${API_URL}"
+RUN sed -i "s|__API_URL__|${API_URL}|"  /usr/share/nginx/html/index.html
 
-RUN <<EOF
-useradd -s /bin/bash -m vscode
-groupadd docker
-usermod -aG docker vscode
-EOF
-# install Docker tools (cli, buildx, compose)
-COPY --from=gloursdocker/docker / /
+COPY ./.nginx/nginx.conf ./etc/nginx/nginx.conf
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
-CMD ["ng", "serve", "--host", "0.0.0.0"]

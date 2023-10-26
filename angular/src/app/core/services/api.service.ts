@@ -17,7 +17,7 @@ export class ApiService {
 
     getHttpData(): Observable<HttpData> {
         return this.http
-            .get<HttpData>(this.API_PATH)
+            .get<HttpData>(this.API_PATH + "/api/rubetek/angular-testcase-list/")
     }
 }
 
