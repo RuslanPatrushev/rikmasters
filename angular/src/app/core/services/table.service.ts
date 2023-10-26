@@ -157,7 +157,7 @@ export class TableService {
 
 
     filterPredicate(user: User, filterString: string): boolean {
-        let filter: Map<string, string | number | boolean> = new Map(JSON.parse(filterString));//todo
+        let filter: Map<string, string | number | boolean> = new Map(JSON.parse(filterString));
         for (let [key, value] of filter) {
             if (value != user[key as keyof User]) {
                 return false;
