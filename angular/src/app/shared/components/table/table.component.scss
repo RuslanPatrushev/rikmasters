@@ -3,196 +3,220 @@
 @use '@angular/material' as mat;
 
 .table-card {
-    margin: 32px 0 0;
-    box-shadow: none !important;
-    font-size: 14px;
+  margin: 32px 0 0;
+  box-shadow: none !important;
+  font-size: 14px;
+
+  @media screen and (max-width: theme.$width-medium) {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .paginator {
+    display: flex;
+    margin: 24px 0 24px 60px;
+
+    @media screen and (max-width: theme.$width-large) {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 24px 0 0 60px;
+    }
 
     @media screen and (max-width: theme.$width-medium) {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 0;
     }
 
-    .paginator {
-        display: flex;
-        margin: 24px 0 24px 60px;
-
-        @media screen and (max-width: theme.$width-large) {
-            display: flex;
-            flex-wrap: wrap;
-            margin: 24px 0 0 60px;
-        }
-
-        @media screen and (max-width: theme.$width-medium) {
-            justify-content: space-between;
-            margin: 0;
-        }
-
-        mat-paginator {
-            margin: 16px 0 0 0;
-        }
+    mat-paginator {
+      margin: 16px 0 0 0;
     }
+  }
 
-    &__counter {
-        display: flex;
-        align-items: center;
-        color: rgba(102, 111, 120, 1);
-        margin: 16px 0 0 0;
-
-        @media screen and (max-width: theme.$width-large) {
-            margin: 16px 0 16px 16px;
-            width: 100%;
-        }
-
-        @media screen and (max-width: theme.$width-medium) {
-            margin: 16px 16px 0 0;
-            width: auto;
-        }
-        @media screen and (max-width: theme.$width-small) {
-            margin: 16px 16px 0 16px;
-            width: 100%;
-        }
-    }
-
-    &__header {
-        background: mat.get-color-from-palette(styles.$rikmasters-primary);
-
-        > * {
-            text-align: center;
-            color: white;
-        }
-
-        th {
-            padding: 0 4px 0 4px;
-        }
-
-        th:nth-child(2) {
-            text-align: left !important;
-        }
-    }
-
-    .table-card-item {
-        @media screen and (max-width: theme.$width-medium) {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            padding: 0 0 9px 0;
-        }
-
-        .table-card-item-row {
-
-            @media screen and (max-width: theme.$width-medium) {
-                box-sizing: border-box;
-                width: 50%;
-                display: flex;
-                border-top: 1px solid rgba(130, 140, 150, 0.4);
-                border-right: 1px solid rgba(130, 140, 150, 0.4);
-                border-bottom: 1px solid rgba(130, 140, 150, 0.4);
-                height: 56px;
-            }
-
-            @media screen and (max-width: theme.$width-extra-small) {
-                width: 100%;
-            }
-
-            &:nth-child(2) {
-                .table-card-item-row__cell {
-                    @media screen and (max-width: theme.$width-medium) {
-                        padding: 0 0 0 8px;
-                    }
-                }
-            }
-
-            &__cell {
-                @media screen and (max-width: theme.$width-medium) {
-                    padding: 0 0 0 48px;
-                    box-sizing: border-box;
-                    width: 50%;
-                    display: flex;
-                    align-items: center;
-                }
-
-                button {
-                    @media screen and (max-width: theme.$width-medium) {
-
-                        justify-content: flex-start;
-                        padding: 0;
-                        width: 24px;
-                        height: 24px;
-                        min-width: 24px;
-                    }
-                }
-
-                &:first-child {
-                    @media screen and (max-width: theme.$width-medium) {
-                        font-weight: bolder;
-                    }
-                }
-
-                &:nth-child(2) {
-                    @media screen and (max-width: theme.$width-medium) {
-                        padding: 0 0 0 16px;
-                    }
-                }
-            }
-        }
-    }
-
-
-    td {
-        padding: 0 4px 0 4px;
-        text-align: center;
-    }
-
-    .cell-login {
-        text-align: left;
-    }
-
-    th:nth-child(2) {
-        .mat-sort-header-container {
-            background: blue;
-            padding: 0;
-            justify-content: flex-start;
-        }
-    }
-
-    .cell-status {
-        color: rgba(255, 0, 31, 1);
-
-        &_active {
-            color: rgba(37, 181, 83, 1);
-        }
-    }
-
-    .cell-ecp {
-        text-align: center;
-        color: rgba(255, 0, 31, 1);
-
-        &_active {
-            color: rgba(37, 181, 83, 1);
-        }
-    }
-}
-
-.sort-select {
-    padding: 16px 0 8px 16px;
-    font-size: 16px;
+  &__counter {
     display: flex;
     align-items: center;
     color: rgba(102, 111, 120, 1);
+    margin: 16px 0 0 0;
 
+    @media screen and (max-width: theme.$width-large) {
+      margin: 16px 0 16px 16px;
+      width: 100%;
+    }
+
+    @media screen and (max-width: theme.$width-medium) {
+      margin: 16px 16px 0 0;
+      width: auto;
+    }
     @media screen and (max-width: theme.$width-small) {
-        padding: 16px 0 62px 16px;
-        align-items: baseline;
+      margin: 16px 16px 0 16px;
+      width: 100%;
+    }
+  }
+
+  &__header {
+    background: mat.get-color-from-palette(styles.$rikmasters-primary);
+
+    > * {
+      text-align: center;
+      color: white;
     }
 
-    mat-form-field {
-        width: 145px;
+    th {
+      padding: 0 4px 0 4px;
     }
 
-    &__wrapper {
-        padding: 0 0 0 8px;
+    th:nth-child(2) {
+      text-align: left !important;
     }
+  }
+
+  .table-card-item {
+    @media screen and (max-width: theme.$width-medium) {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      padding: 0 0 9px 0;
+    }
+
+    .table-card-item-row {
+
+      @media screen and (max-width: theme.$width-medium) {
+        box-sizing: border-box;
+        width: 50%;
+        display: flex;
+        border-bottom: 1px solid rgba(130, 140, 150, 0.4);
+        height: 56px;
+      }
+
+      @media screen and (max-width: theme.$width-extra-small) {
+        width: 100%;
+        border-bottom: 1px solid rgba(130, 140, 150, 0.4);
+      }
+
+      &:nth-child(1) {
+        @media screen and (max-width: theme.$width-medium) {
+          border-top: 1px solid rgba(130, 140, 150, 0.4);
+        }
+      }
+
+      &:nth-child(2) {
+        @media screen and (max-width: theme.$width-medium) {
+          border-top: 1px solid rgba(130, 140, 150, 0.4);
+        }
+        @media screen and (max-width: theme.$width-extra-small) {
+          border-top: none;
+        }
+
+        .table-card-item-row__cell {
+          @media screen and (max-width: theme.$width-medium) {
+            padding: 0 0 0 8px;
+          }
+        }
+      }
+
+      &:nth-child(2n+1) {
+        @media screen and (max-width: theme.$width-medium) {
+          border-right: 1px solid rgba(130, 140, 150, 0.4);
+        }
+        @media screen and (max-width: theme.$width-extra-small) {
+          border-right: none;
+        }
+      }
+
+      &__cell {
+        @media screen and (max-width: theme.$width-medium) {
+          padding: 0 0 0 48px;
+          box-sizing: border-box;
+          width: 50%;
+          display: flex;
+          align-items: center;
+        }
+
+        button {
+          @media screen and (max-width: theme.$width-medium) {
+
+            justify-content: flex-start;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+          }
+        }
+
+        &:first-child {
+          @media screen and (max-width: theme.$width-medium) {
+            font-weight: bolder;
+          }
+          @media screen and (max-width: theme.$width-extra-small) {
+            border-right: 1px solid rgba(130, 140, 150, 0.4);
+          }
+        }
+
+        &:nth-child(2) {
+          @media screen and (max-width: theme.$width-medium) {
+            padding: 0 0 0 16px;
+          }
+        }
+      }
+    }
+  }
+
+
+  td {
+    padding: 0 4px 0 4px;
+    text-align: center;
+  }
+
+  .cell-login {
+    text-align: left;
+  }
+
+  th:nth-child(2) {
+    .mat-sort-header-container {
+      background: blue;
+      padding: 0;
+      justify-content: flex-start;
+    }
+  }
+
+  .cell-status {
+    color: rgba(255, 0, 31, 1);
+
+    &_active {
+      color: rgba(37, 181, 83, 1);
+    }
+  }
+
+  .cell-ecp {
+    text-align: center;
+    color: rgba(255, 0, 31, 1);
+
+    &_active {
+      color: rgba(37, 181, 83, 1);
+    }
+  }
+}
+
+.sort-select {
+  padding: 16px 0 8px 16px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  color: rgba(102, 111, 120, 1);
+
+  @media screen and (max-width: theme.$width-small) {
+    padding: 16px 0 62px 16px;
+    align-items: baseline;
+  }
+
+  mat-form-field {
+    width: 145px;
+  }
+
+  &__wrapper {
+    padding: 0 0 0 8px;
+  }
 }
