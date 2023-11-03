@@ -35,6 +35,7 @@ import {getRusPaginatorIntl} from "./core/utils/rus-paginator-intl";
 import {NgxMaskDirective, provideEnvironmentNgxMask} from "ngx-mask";
 import {MatSortModule} from "@angular/material/sort";
 import {HttpClientModule} from "@angular/common/http";
+import { VersionPipe } from './shared/pipes/version.pipe';
 
 @NgModule({
     declarations: [
@@ -49,6 +50,7 @@ import {HttpClientModule} from "@angular/common/http";
         TableComponent,
         StatusNamePipe,
         MainComponent,
+        VersionPipe,
     ],
     imports: [
         CommonModule,
