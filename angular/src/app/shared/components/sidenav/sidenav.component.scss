@@ -5,16 +5,17 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  margin: 16px 40px 16px 15%;
-  width: 189px;
+  margin-top: 4px;
+  padding: 16px 40px 16px 15%;
+  width: 100%;
+
 
   @media screen and (max-width: theme.$width-extra-large) {
-    margin: 16px 50px 16px 60px;
+    padding: 16px 50px 16px 60px;
   }
 
   @media screen and (max-width: theme.$width-large) {
     margin: 0 16px 0 16px;
-    width: auto;
     padding: 16px 0 16px 0;
   }
 
@@ -59,7 +60,11 @@
 }
 
 :nth-child(1 of .group) {
-  background-color: rgba(102, 111, 120, 1);
+  background: rgba(162, 169, 177, 1);
+
+  @media screen and (max-width: theme.$width-large) {
+    background: none;
+  }
 }
 
 :nth-child(n+1 of .group):nth-child(-n+2 of .group) {
