@@ -26,12 +26,12 @@ export const FILTER_ACTION = {
             login: {
                 title: "Логин",
                 icon: "close",
-                errorText: "Проверьте правильность введенных данных"
+                errorText: "Недопустимые символы"
             },
             phone: {
                 title: "Телефон",
                 icon: "close",
-                errorText: "Проверьте правильность введенных данных"
+                errorText: "Недопустимые символы"
             },
             createAt: {
                 title: "Дата создания",
@@ -44,7 +44,7 @@ export const FILTER_ACTION = {
             email: {
                 title: "E-mail",
                 icon: "close",
-                errorText: "Проверьте правильность введенных данных"
+                errorText: "Недопустимые символы"
             },
             isAdmin: {
                 title: "Роль",

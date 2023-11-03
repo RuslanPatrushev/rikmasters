@@ -21,11 +21,11 @@ export class FilterActionComponent {
     constructor(private tableService: TableService) {
 
         this.userForm = new FormGroup({
-            name: new FormControl("", Validators.pattern("[a-zA-Z]*")),
+            name: new FormControl("", Validators.pattern("[a-zA-Zа-яА-я]*")),
             email: new FormControl("", [
                 Validators.email
             ]),
-            phone: new FormControl("", Validators.pattern("[0-9]{10}")),
+            phone: new FormControl("", Validators.pattern("[0-9]{11}")),
             createAt: new FormControl(""),
             updateAt: new FormControl(""),
             isAdmin: new FormControl(""),
