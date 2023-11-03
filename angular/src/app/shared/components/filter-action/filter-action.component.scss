@@ -1,176 +1,193 @@
 @use "src/theme"  as theme;
 
 .btn-group {
-    margin: 32px 0 0;
+  margin: 32px 0 0;
+  display: flex;
+  justify-content: space-between;
+
+  @media screen and (max-width: theme.$width-small) {
+    flex-wrap: wrap;
+    margin: 0 16px;
+  }
+
+  button {
+    font-size: 14px;
+    font-family: "Moscow sans", serif;
+  }
+
+  .group-control-tbl {
     display: flex;
-    justify-content: space-between;
+    width: 100%;
 
     @media screen and (max-width: theme.$width-small) {
-        flex-wrap: wrap;
-        margin: 0 16px;
+      margin-bottom: 24px;
     }
 
-    button {
-        font-size: 14px;
-        font-family: "Moscow sans", serif;
+    @media screen and (max-width: theme.$width-extra-small) {
+      margin-bottom: 8px;
+      flex-wrap: wrap;
     }
 
-    .group-control-tbl {
-        display: flex;
-        width: 100%;
+    &__btn {
+      margin: 0 24px 0 0;
+      display: flex;
+      align-items: center;
+      flex-direction: row-reverse;
 
-        @media screen and (max-width: theme.$width-small) {
-            margin-bottom: 24px;
-        }
+      @media screen and (max-width: theme.$width-extra-small) {
+        width: calc(50% - 8px);
+        margin: 0;
+      }
+
+      .mat-icon {
+        margin: 0 0 0 8px;
 
         @media screen and (max-width: theme.$width-extra-small) {
-            margin-bottom: 8px;
-            flex-wrap: wrap;
+          display: none;
         }
-
-        &__btn {
-            margin: 0 24px 0 0;
-            display: flex;
-            align-items: center;
-            flex-direction: row-reverse;
-
-            @media screen and (max-width: theme.$width-extra-small) {
-                width: calc(50% - 8px);
-                margin: 0;
-            }
-
-            .mat-icon {
-                margin: 0 0 0 8px;
-
-                @media screen and (max-width: theme.$width-extra-small) {
-                    display: none;
-                }
-            }
-        }
-
-        .group-control-tbl__btn:first-child {
-            @media screen and (max-width: theme.$width-extra-small) {
-                margin: 0 16px 0 0;
-            }
-        }
-
-        .group-control-tbl__btn:last-child {
-            @media screen and (max-width: theme.$width-extra-small) {
-                margin: 8px 0 0 0;
-            }
-        }
+      }
     }
 
-    &__control-filter-btn {
-        background: #dcdcdc;
-        color: #666F78;
-        box-shadow: none;
-
-        @media screen and (max-width: theme.$width-extra-small) {
-            width: calc(50% - 8px);
-        }
-
-        .mat-icon {
-            overflow: unset;
-        }
+    .group-control-tbl__btn:first-child {
+      @media screen and (max-width: theme.$width-extra-small) {
+        margin: 0 16px 0 0;
+      }
     }
+
+    .group-control-tbl__btn:last-child {
+      @media screen and (max-width: theme.$width-extra-small) {
+        margin: 8px 0 0 0;
+      }
+    }
+  }
+
+  &__control-filter-btn {
+    background: #dcdcdc;
+    color: #666F78;
+    box-shadow: none;
+
+    @media screen and (max-width: theme.$width-extra-small) {
+      width: calc(50% - 8px);
+    }
+
+    .mat-icon {
+      overflow: unset;
+    }
+  }
 }
 
 .filter-form {
-    margin: 32px 0 0;
+  margin: 32px 0 0;
 
-    &__wrapper {
-        padding: 32px 40px 32px 40px;
-        box-shadow: none;
+  &__wrapper {
+    padding: 32px 40px 32px 40px;
+    box-shadow: none;
 
-        @media screen and (max-width: theme.$width-extra-small) {
-            padding: 8px 18px 4px 14px;
-        }
+    @media screen and (max-width: theme.$width-extra-small) {
+      padding: 8px 18px 4px 14px;
+    }
+  }
+
+  &__tittle {
+    padding: 0;
+    font-size: 20px;
+    font-weight: bold;
+
+    @media screen and (max-width: theme.$width-extra-small) {
+      margin: 8px 0 0 2px;
+    }
+  }
+
+  &__content {
+    margin: 32px 0 0 24px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    @media screen and (max-width: theme.$width-extra-small) {
+      margin: 16px 0 0 0;
     }
 
-    &__tittle {
-        padding: 0;
-        font-size: 20px;
-        font-weight: bold;
+    .filter-card {
+      box-sizing: border-box;
+      width: 25%;
+      padding: 0 24px 0 0;
 
-        @media screen and (max-width: theme.$width-extra-small) {
-            margin: 8px 0 0 2px;
-        }
-    }
 
-    &__content {
-        margin: 32px 0 0 24px;
+      @media screen and (max-width: theme.$width-large) {
+        width: 33%;
+      }
+
+      @media screen and (max-width: theme.$width-small) {
+        width: 50%;
+      }
+
+      @media screen and (max-width: theme.$width-extra-small) {
         width: 100%;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        margin: 3px 0 0 0;
+        padding: 0;
 
-        @media screen and (max-width: theme.$width-extra-small) {
-            margin: 16px 0 0 0;
+        &:nth-child(5) {
+          margin: 24px 0 0 0;
         }
-
-        .filter-card {
-            box-sizing: border-box;
-            width: 25%;
-            padding: 0 24px 0 0;
-
-
-            @media screen and (max-width: theme.$width-large) {
-                width: 33%;
-            }
-
-            @media screen and (max-width: theme.$width-small) {
-                width: 50%;
-            }
-
-            @media screen and (max-width: theme.$width-extra-small) {
-                width: 100%;
-                margin: 0;
-            }
-
-            &__tittle {
-                font-size: 16px;
-                font-weight: bold;
-            }
-
-            .mat-mdc-form-field {
-                margin: 10px 0 0 0;
-                width: 100%;
-            }
+        &:nth-child(7) {
+          margin: 24px 0 0 0;
         }
+      }
+
+      &__tittle {
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .mat-mdc-form-field {
+        margin: 10px 0 0 0;
+        width: 100%;
+      }
+    }
+  }
+
+  &__btn-group {
+    display: flex;
+    margin: 10px 0 0 24px;
+
+    @media screen and (max-width: theme.$width-extra-small) {
+      flex-wrap: wrap;
+      margin: 6px 0 0 0;
     }
 
-    &__btn-group {
-        display: flex;
-        margin: 10px 0 0 24px;
+    .mdc-button {
+      margin: 0 24px 0 0;
+      color: #666F78;
+      background: #dcdcdc;
+      box-shadow: none;
+      width: 169px;
 
-        @media screen and (max-width: theme.$width-extra-small) {
-            flex-wrap: wrap;
-            margin: 6px 0 0 24px;
-        }
+      @media screen and (max-width: theme.$width-small) {
+        width: 154px;
+      }
 
-        .mdc-button {
-            margin: 0 24px 0 0;
-            color: #666F78;
-            background: #dcdcdc;
-            box-shadow: none;
-        }
+      @media screen and (max-width: theme.$width-extra-small) {
+        width: 100%;
+        margin: 4px 74px 4px 78px;
+      }
 
-        .mdc-button:first-child {
-            background: #DA2032;
-            color: white;
-            margin: 0 25px 0 0;
-
-            @media screen and (max-width: theme.$width-extra-small) {
-                width: 100%;
-                margin: 4px 96px
-            }
-        }
     }
 
-    .mat-mdc-card {
-        .mat-mdc-card-content {
-            padding: 0;
-        }
+    .mdc-button:first-child {
+      background: #DA2032;
+      color: white;
+      margin: 0 25px 0 0;
+      @media screen and (max-width: theme.$width-extra-small) {
+        margin: 4px 74px 4px 78px;
+      }
     }
+  }
+
+  .mat-mdc-card {
+    .mat-mdc-card-content {
+      padding: 0;
+    }
+  }
 }
