@@ -33,12 +33,12 @@ import {Subscription} from "rxjs";
 })
 
 export class TableComponent implements AfterViewInit, OnInit, OnDestroy {
-    tableColumns: TableColumn[] = COLUMN_TABLE;
+    tableColumns: TableColumn[] = COLUMN_TABLE.filter((col: TableColumn) => col.name!="action");
     pageSize = DEFAULT_PAGE_SIZE;
     pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS;
 
     tableSelection: SelectionModel<User>;
-    displayedColumns: string[] = this.tableColumns.map((col: TableColumn) => col.name);
+    displayedColumns: string[] = COLUMN_TABLE.map((col: TableColumn) => col.name);
     dataSource: MatTableDataSource<User, MatTableDataSourcePaginator>;
     filteredData: User[] = [];
     sortState: Sort;
