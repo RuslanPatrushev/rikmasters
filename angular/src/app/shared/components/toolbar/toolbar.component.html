@@ -9,12 +9,10 @@
           <div>{{profile.role}}</div>
         </div>
 
-        <button mat-button [matMenuTriggerFor]="userMenu" class="toolbar-button">
+        <button mat-button class="toolbar-button">
           <mat-icon>{{toolbar.icons.arrow_drop_down}}</mat-icon>
         </button>
 
-        <mat-menu #userMenu="matMenu">
-        </mat-menu>
       </mat-nav-list>
     </ng-container>
 
