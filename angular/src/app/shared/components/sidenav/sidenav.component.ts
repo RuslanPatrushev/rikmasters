@@ -3,6 +3,7 @@ import {SideNav} from "./models";
 import {WindowSizeService} from "../../../core/services/window-size.service";
 import {WindowSizeEnum} from "../../../core/enums/window-size.enum";
 import {SIDE_NAV} from "../../../core/constants/side-nav.const";
+import packageJson from '../../../../../package.json';
 
 @Component({
     selector: 'rik-sidenav',
@@ -19,5 +20,6 @@ export class SidenavComponent {
     constructor(public windowSizeService: WindowSizeService) {
     }
 
-    sideNav: SideNav = SIDE_NAV
+    protected readonly sideNav: SideNav = SIDE_NAV
+    protected readonly version: string = packageJson.version;
 }

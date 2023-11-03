@@ -1,31 +1,35 @@
-<ng-container *ngIf="(windowSizeService.currentTheme$ |async) != windowSizeEnum.ExtraLarge">
-    <ng-container *ngFor="let group of sideNav.groupsMobile">
+<div>
+    <ng-container *ngIf="(windowSizeService.currentTheme$ |async) != windowSizeEnum.ExtraLarge">
+        <ng-container *ngFor="let group of sideNav.groupsMobile">
+            <div class="group">
+                <div class="group__content">
+                    <mat-icon *ngIf="group.icon">{{group.icon}}</mat-icon>
+                    <div class="group__text">{{group.name}}</div>
+                </div>
+
+                <div *ngFor="let subGroup of group.subGroups" class="group__sub">
+                    <span>{{subGroup.name}}</span>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+    <rik-nav-list></rik-nav-list>
+    <ng-container *ngFor="let group of sideNav.groups">
         <div class="group">
             <div class="group__content">
                 <mat-icon *ngIf="group.icon">{{group.icon}}</mat-icon>
                 <div class="group__text">{{group.name}}</div>
             </div>
 
-            <div *ngFor="let subGroup of group.subGroups" class="group__sub">
-                <span>{{subGroup.name}}</span>
-            </div>
+            <ng-container *ngIf="(windowSizeService.currentTheme$ |async) == windowSizeEnum.ExtraLarge">
+                <div *ngFor="let subGroup of group.subGroups" class="group__sub">
+                    <div>{{subGroup.name}}</div>
+                </div>
+            </ng-container>
         </div>
     </ng-container>
-</ng-container>
-<rik-nav-list></rik-nav-list>
-<ng-container *ngFor="let group of sideNav.groups">
-    <div class="group">
-        <div class="group__content">
-            <mat-icon *ngIf="group.icon">{{group.icon}}</mat-icon>
-            <div class="group__text">{{group.name}}</div>
-        </div>
-
-        <ng-container *ngIf="(windowSizeService.currentTheme$ |async) == windowSizeEnum.ExtraLarge">
-            <div *ngFor="let subGroup of group.subGroups" class="group__sub">
-                <div>{{subGroup.name}}</div>
-            </div>
-        </ng-container>
-    </div>
-</ng-container>
-
+</div>
+<div class="version">
+    {{version | version}}
+</div>
 
