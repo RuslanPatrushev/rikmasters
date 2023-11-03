@@ -3,7 +3,7 @@ import {Toolbar} from "./models";
 import {WindowSizeService} from "../../../core/services/window-size.service";
 import {WindowSizeEnum} from "../../../core/enums/window-size.enum";
 import {SidenavService} from "../../../core/services/sidenav.service";
-import {Profile} from "../../../core/models/profile";
+import {Profile} from "../../../core/models/profile.model";
 import {PROFILE} from "../../../core/constants/profile.const";
 import {TOOLBAR} from "../../../core/constants/toolbar.const";
 

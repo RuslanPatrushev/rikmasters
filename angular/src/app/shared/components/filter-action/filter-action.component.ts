@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {StatusEnum} from "../../../core/enums/status.enum";
 import {TableService} from "../../../core/services/table.service";
-import {UserForm} from "../../../core/models/user-form";
+import {UserForm} from "../../../core/models/user-form.model";
 import {FILTER_ACTION} from "../../../core/constants/filter-action.const";
 import {RoleEnum} from "../../../core/enums/role.enum";
 import {FilterAction} from "./models";

@@ -3,16 +3,16 @@ import {map, Observable} from "rxjs";
 import {User, UserData} from "../models/user.model";
 import {LOCAL_STORAGE} from "../constants/local-storage..consts";
 import {StatusEnum} from "../enums/status.enum";
-import {HttpData} from "./api.service";
+import {TestcaseList} from "../models/testcase-list.model";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
 
-    httpDataToUsers(httpData$: Observable<HttpData>): Observable<User[]> {
+    httpDataToUsers(httpData$: Observable<TestcaseList>): Observable<User[]> {
         return httpData$.pipe(
-            map((httpData: HttpData) => {
+            map((httpData: TestcaseList) => {
                 return httpData.users.map((user: User): User => {
                     return {...user, ...httpData.data.find((data: UserData): boolean => data.user_id == user.id)}
                 })

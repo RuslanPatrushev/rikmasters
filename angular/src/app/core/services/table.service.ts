@@ -3,7 +3,7 @@ import {User} from "../models/user.model";
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatSelectChange} from "@angular/material/select";
 import {MatTableDataSource, MatTableDataSourcePaginator} from "@angular/material/table";
-import {UserForm} from "../models/user-form";
+import {UserForm} from "../models/user-form.model";
 import {StatusEnum} from "../enums/status.enum";
 import {MatSort, Sort, SortDirection} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
