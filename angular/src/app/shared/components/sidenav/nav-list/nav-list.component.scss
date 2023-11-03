@@ -4,11 +4,13 @@
 .nav-list {
     padding: 24px 42px 24px 80px;
     border-bottom: 1px solid rgba(196, 196, 196, 1);
+    border-top: 1px solid rgba(196, 196, 196, 1);
 
     @media screen and (max-width: theme.$width-large) {
         margin: 0 16px 0 16px;
         width: auto;
         padding: 16px 0 16px 0;
+        border-top: none;
     }
 
     &__content {
