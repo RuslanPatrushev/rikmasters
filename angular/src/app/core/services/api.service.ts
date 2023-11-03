@@ -1,24 +1,26 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment.development";
 import {HttpClient} from "@angular/common/http";
-import {map, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {User, UserData} from "../models/user.model";
-import {StatusEnum} from "../enums/status.enum";
-import {LOCAL_STORAGE} from "../constants/local-storage..consts";
+import {DEFAULT_URL, URL_REF} from "../constants/url.const";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApiService {
-    private readonly API_PATH = environment.apiUrl;
+    private api_url;
 
     constructor(private http: HttpClient) {
+        this.api_url = this.ENV_API_URL === URL_REF ? DEFAULT_URL : this.ENV_API_URL
     }
 
     getHttpData(): Observable<HttpData> {
         return this.http
-            .get<HttpData>(this.API_PATH + "/api/rubetek/angular-testcase-list/")
+            .get<HttpData>(this.api_url + "/api/rubetek/angular-testcase-list/")
     }
+
+    private readonly ENV_API_URL = environment.apiUrl;
 }
 
 //todo
