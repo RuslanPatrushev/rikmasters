@@ -1,46 +1,68 @@
 @use 'src/theme' as theme;
 
 mat-sidenav-container {
-    height: 100%;
+  min-height:  100vh;
 }
 
-.sidenav{
-    background: #666F78
+.sidenav {
+  background: #666F78;
+  padding: 70px 0 0 0;
+
+  @media screen and (max-width: theme.$width-medium) {
+    padding: 50px 0 0 0;
+  }
+
+  &__container {
+    //height: calc(100% - 70px);
+    height: 100% ;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @media screen and (max-width: theme.$width-medium) {
+      //height: calc(100% - 50px);
+      height: 100% ;
+    }
+  }
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    padding: 40px 40px 49px 24px;
-    background: rgba(245, 246, 247, 1);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 110px 40px 49px 24px;
+  background: rgba(245, 246, 247, 1);
+  min-height: 100vh;
+
+  overflow: hidden;
 }
 
 @media screen and (max-width: theme.$width-large) {
-    .container {
-        padding: 40px 44px 49px 44px;
-    }
+  .container {
+    padding: 110px 44px 49px 44px;
+  }
 }
 
 @media screen and (max-width: theme.$width-medium) {
-    .container {
-        padding: 40px 40px 49px 40px;
-    }
+  .container {
+    padding: 90px 40px 49px 40px;
+  }
 }
 
 @media screen and (max-width: theme.$width-small) {
-    .container {
-        padding: 40px 0 49px 0;
-    }
+  .container {
+    padding: 90px 0 49px 0;
+  }
 }
 
 @media screen and (max-width: theme.$width-extra-small) {
 
-    mat-sidenav {
-        width: 100%;
-    }
+  mat-sidenav {
+    width: 100%;
+  }
 
-    .container {
-        padding: 32px 0;
-    }
+  .container {
+    padding: 82px 0;
+  }
 }

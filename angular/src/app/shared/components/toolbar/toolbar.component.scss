@@ -3,6 +3,8 @@
 .toolbar {
   height: 70px;
   justify-content: flex-end;
+  position: absolute;
+  z-index: 2;
 
   & mat-nav-list {
     display: flex;

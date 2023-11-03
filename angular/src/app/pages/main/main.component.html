@@ -5,7 +5,7 @@
     <mat-sidenav class="sidenav"
                  [mode]="(windowSizeService.currentTheme$.value) === windowSizeEnum.ExtraLarge? 'side' : 'over'"
                  [opened]="sidenavService.currentStatus$ | async">
-        <rik-sidenav></rik-sidenav>
+        <rik-sidenav class="sidenav__container"></rik-sidenav>
     </mat-sidenav>
 
     <mat-sidenav-content class="container">
